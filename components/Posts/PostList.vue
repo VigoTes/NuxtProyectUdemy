@@ -7,23 +7,17 @@
 
 
             <PostPreview
-            id="1"
+            v-for="post in posts"
+            :key="post.id"
+
+            :id="post.id"
             :is-admin="isAdmin"
-            thumbnail ="https://gestion.cedepas.org/img/LogoCedepas.png"
-            title="Hello there"
-            previewText = "este es mi primer post"
+            :thumbnail ="post.thumbnail"
+            :title="post.title"
+            :previewText = "post.previewText"
             />
 
-                 
-            <PostPreview
-            id="1"
-             :is-admin="isAdmin"
-            thumbnail ="https://gestion.cedepas.org/img/LogoCedepas.png"
-            title="Hello there"
-            previewText = "este es mi primer post"
-            />
-
- 
+                  
 
     
 
@@ -43,6 +37,10 @@
          isAdmin :{
              type: Boolean,
              default: false
+         },
+         posts:{
+             type:Array,
+             required:true
          }
      }
  }

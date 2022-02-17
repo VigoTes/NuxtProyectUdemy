@@ -3,16 +3,18 @@
 
         <section class="post">
             <h1 class="post-title">
-                Title of the post
+                {{loadedPost.title}}
             </h1>
             <div class="post-details">
                 <div class="post-detail">
-                    Last updated on: XX
+                    Last updated on: {{loadedPost.updatedDate}}
                 </div>
                 <div class="post-detail">
-                    Writen by NAME
+                    Writen by {{loadedPost.author}}
                 </div>
-                <p class="post-content">Content of the post:</p>
+                <p class="post-content">
+                    {{loadedPost.content}}
+                </p>
             </div>
         </section>
         <section class="post-feedback">
@@ -27,7 +29,29 @@
     </div>
 </template>
 
+<script>
+export default {
+    asyncData(context, callback){
+        setTimeout(()=>{
 
+            callback(null,{
+
+                loadedPost:{
+                     id:"1",
+                    title:"first post (ID: "+context.route.params.id+")",
+                    previewText:"hola mundo",
+                    author:"Maximiliano",
+                    updatedDate: new Date(),
+                    content:"some dummy text que no es el preview text",
+                    thumbnail:"https://gestion.cedepas.org/img/LogoCedepas.png"
+                }
+            });
+            
+        },1000)
+
+    }
+}
+</script>
 
 <style scoped>
     .single-post-page {

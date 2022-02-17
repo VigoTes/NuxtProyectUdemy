@@ -4,7 +4,7 @@
             <h1>Get the lastes thech news</h1>
         </section>
 
-        <PostList />
+        <PostList :posts="loadedPosts"/>
 
 
     </div>
@@ -16,6 +16,41 @@
  export default {
      components:  {
          PostList
+     },
+     asyncData(context,callback){
+         console.log(context)
+         setTimeout(()=>{
+             callback(null, 
+                            {
+                            loadedPosts : 
+                                      
+                                        [
+                                            {
+                                                id:"1",
+                                                title:"first post",
+                                                previewText:"hola mundo",
+                                                thumbnail:"https://gestion.cedepas.org/img/LogoCedepas.png"
+                                            },
+                                            {
+                                            id:"2",
+                                            title:"second post",
+                                            previewText:"hola2 mundo",
+                                            thumbnail:"https://gestion.cedepas.org/img/LogoCedepas.png"
+                                            }
+                                        ] 
+                            }
+            )
+         },1500)
+     },
+/* 
+     data(){
+         return {
+             loadedPosts: []
+         };
+     },
+      */
+     created(){
+         
      }
  }
 </script>
