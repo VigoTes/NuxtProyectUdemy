@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import AdminPostForm from '@/components/UI/AppControlInput'
+import AdminPostForm from '@/components/Admin/AdminPostForm'
 
 export default {
     components:{
