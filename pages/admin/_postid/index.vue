@@ -9,23 +9,37 @@
 
 <script>
 import AdminPostForm  from '@/components/Admin/AdminPostForm'
-
+import axios from 'axios'
 export default {
     layout:'admin',
     components:{
         AdminPostForm
     },
-    data(){
-        return {
-            loadedPost:{
-                author:'Maximo',
-                title :' tituo de pl post',
-                content: ' super amaizin',
-                thumbnailLink : 'www.maracsoft.com/img/CedepasNorte.png'
 
-            }
-        }
+      asyncData(context){
+        var rutaAConsultar = 'https://nuxt-blog-1a161-default-rtdb.firebaseio.com/posts/' + context.params.postid + '.json';
+         
+        return axios.get(rutaAConsultar)
+            .then( res => {
+                console.log("Se hizo una consulta a " + rutaAConsultar)
+                console.log("LA RES ES:")
+                console.log(res.data)
+
+                if(res.data === null){
+                    throw new Error(e)
+                }
+                    
+                return {
+                    loadedPost : res.data
+                }
+            })
+            .catch( e => {
+                console.log("HUBO UN ERROR")
+                context.error(e)
+            })
+
     }
+     
 
 }
 </script>

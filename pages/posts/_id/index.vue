@@ -36,14 +36,17 @@ import axios from 'axios'
 export default {
     asyncData(context){
         var rutaAConsultar = 'https://nuxt-blog-1a161-default-rtdb.firebaseio.com/posts/' + context.params.id + '.json';
-        console.log("CONSULTANDO A RUTA:")
-        console.log(rutaAConsultar);
-
+         
         return axios.get(rutaAConsultar)
             .then( res => {
-                console.log("TODO CORRECTO")
+                console.log("Se hizo una consulta a " + rutaAConsultar)
                 console.log("LA RES ES:")
-                console.log(res)
+                console.log(res.data)
+
+                if(res.data === null){
+                    throw new Error(e)
+                }
+                    
                 return {
                     loadedPost : res.data
                 }
