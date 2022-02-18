@@ -30,24 +30,28 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
-    asyncData(context, callback){
-        setTimeout(()=>{
+    asyncData(context){
+        var rutaAConsultar = 'https://nuxt-blog-1a161-default-rtdb.firebaseio.com/posts/' + context.params.id + '.json';
+        console.log("CONSULTANDO A RUTA:")
+        console.log(rutaAConsultar);
 
-            callback(null,{
-
-                loadedPost:{
-                     id:"1",
-                    title:"first post (ID: "+context.route.params.id+")",
-                    previewText:"hola mundo",
-                    author:"Maximiliano",
-                    updatedDate: new Date(),
-                    content:"some dummy text que no es el preview text",
-                    thumbnail:"https://gestion.cedepas.org/img/LogoCedepas.png"
+        return axios.get(rutaAConsultar)
+            .then( res => {
+                console.log("TODO CORRECTO")
+                console.log("LA RES ES:")
+                console.log(res)
+                return {
+                    loadedPost : res.data
                 }
-            });
-            
-        },1000)
+            })
+            .catch( e => {
+                console.log("HUBO UN ERROR")
+                context.error(e)
+            })
 
     }
 }

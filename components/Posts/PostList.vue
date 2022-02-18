@@ -1,11 +1,6 @@
 <template>
-    
       <div class="posts-page">
-
-        
         <section class="post-list">
-
-
             <PostPreview
             v-for="post in posts"
             :key="post.id"
@@ -16,11 +11,6 @@
             :title="post.title"
             :previewText="post.previewText"
             />
-
-                  
-
-    
-
         </section>
             
     </div>

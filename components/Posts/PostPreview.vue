@@ -1,7 +1,8 @@
 <template>
-    <!--  -->
+   
     <nuxt-link :to="postLink" class="post-preview">
-        <article >
+        <article>
+         
             <div class="post-thumbnail" 
                 :style="{backgroundImage: 'url(' + thumbnail+ ')' }"></div>
             <div class="post-content" >
@@ -43,7 +44,15 @@ export default{
     },
     computed:{
         postLink(){
-            return this.isAdmin ? '/admin/' + this.id : '/posts/' + this.id
+            
+            var ruta = "";
+            if(this.isAdmin)
+                ruta = '/admin/' + this.id
+            else 
+                ruta =  '/posts/' + this.id
+            
+            console.log("CALCULANDO COMPUTED, ruta=" + ruta)
+            return ruta;
         }
     }
 

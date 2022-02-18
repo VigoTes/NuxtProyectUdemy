@@ -19,7 +19,7 @@ export default {
     },
     computed:{
         loadedPosts(){
-            console.log("AAAAAAAAAAA")
+           
             return this.$store.getters.loadedPosts
         }
     }
