@@ -9,7 +9,7 @@
           type="button"
           btn-style="inverted"
           style="margin-left: 10px"
-          @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
+          @click="isLogin = !isLogin">Cambiar a {{ isLogin ? 'Registrarme' : 'Ingresar' }}</AppButton>
       </form>
     </div>
   </div>
@@ -33,25 +33,24 @@ export default {
       password:""
     }
   },
-  methods:{
-      onSubmit(){
-          this.$axios.$post(
-               
-              'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' +
-               process.env.fbAPIKey
-               ,{ 
-                   email: this.email,
-                   password:this.password,
-                   returnSecureToken:true
-               }).then( result => {
-                   console.log(result);
-               }).catch(e => {
+    methods:{
+        onSubmit(){
 
-                   
-               });
 
-      }
-  }
+            this.$store.dispatch('authenticateUser',{
+                isLogin: this.isLogin,
+                email: this.email,
+                password: this.password
+
+            }).then( () => {
+                this.$router.push('/admin')
+            } )
+
+
+            
+
+        }
+    }
 }
 </script>
 

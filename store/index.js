@@ -17,6 +17,9 @@ const createStore = () => {
                 const postIndex = state.loadedPosts.findIndex(post => post.id === editedPost.id);
                 state.loadedPosts[postIndex] = editedPost;
 
+            },
+            setToken(state,token){
+                state.token = token;
             }
         },
         actions: {
@@ -66,6 +69,30 @@ const createStore = () => {
                         console.log(data)
                     })
                     .catch( e => console.log(e))
+
+            },
+            authenticateUser(vuexContext,authData){
+                    
+                let authUrl = '';
+                if(!authData.isLogin){ //MODO REGISTRAR
+                    authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + process.env.fbAPIKey
+                
+                }else{ //modo login
+                    authUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + process.env.fbAPIKey
+
+                }
+
+                return this.$axios.$post(authUrl ,{ 
+                    email: authData.email,
+                    password:authData.password,
+                    returnSecureToken:true
+                }).then( result => {
+                    vuexContext.commit('setToken',result.idToken)
+                    console.log(result);
+                }).catch(e => {
+
+                    
+                });
 
             }
         },
