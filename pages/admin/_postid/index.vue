@@ -30,8 +30,8 @@ export default {
                 }
                     
                 return {
-                    loadedPost : res.data
-                }
+                    loadedPost :  {...res.data , id: context.params.postid}
+                };
             })
             .catch( e => {
                 console.log("HUBO UN ERROR")
@@ -42,12 +42,12 @@ export default {
     methods:{
 
         onSubmitted(editedPost){
-            axios.put( 'https://nuxt-blog-1a161-default-rtdb.firebaseio.com/posts/' + this.$route.params.postid + '.json',editedPost)
-            .then(res => {
+            
+            this.$store.dispatch('editPost',editedPost).then(  ()=>{
+
                 this.$router.push('/admin')
-                console.log(res)
-            })
-            .catch( e => console.log(e))
+            } )
+            
         }
     }
      
