@@ -9,7 +9,7 @@
 
 <script>
 import AdminPostForm  from '@/components/Admin/AdminPostForm'
-import axios from 'axios'
+
 export default {
     layout:'admin',
     components:{
@@ -17,20 +17,20 @@ export default {
     },
 
       asyncData(context){
-        var rutaAConsultar = process.env.baseUrl + '/posts/' + context.params.postid + '.json';
+        var rutaAConsultar =  '/posts/' + context.params.postid + '.json';
          
-        return axios.get(rutaAConsultar)
-            .then( res => {
+        return context.$axios.$get(rutaAConsultar)
+            .then( data => {
                 console.log("Se hizo una consulta a " + rutaAConsultar)
                 console.log("LA RES ES:")
-                console.log(res.data)
+                console.log(data)
 
-                if(res.data === null){
+                if( data === null){
                     throw new Error(e)
                 }
                     
                 return {
-                    loadedPost :  {...res.data , id: context.params.postid}
+                    loadedPost :  {...data , id: context.params.postid}
                 };
             })
             .catch( e => {

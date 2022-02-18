@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import axios from 'axios'
+
 const createStore = () => {
 
     return new Vuex.Store({
@@ -23,11 +23,11 @@ const createStore = () => {
 
             nuxtServerInit(vuexContext,context){
  
-                return axios.get(process.env.baseUrl  + '/posts.json')
-                    .then(  res => {
+                return context.app.$axios.$get(  '/posts.json')
+                    .then(  data => {
                         const postsArray = [];
-                        for (const key in res.data){
-                            postsArray.push( {... res.data[key] ,id: key })
+                        for (const key in data){
+                            postsArray.push( {... data[key] ,id: key })
                         }
                         console.log("el postsArray es:")
                         console.log(postsArray)
@@ -49,9 +49,9 @@ const createStore = () => {
                     ...post,
                     updatedDate : new Date()
                 }
-                axios.post( process.env.baseUrl + '/posts.json', createdPost)
-                .then(result => {
-                    vuexContext.commit('addPost',{... createdPost,id:result.data.name})
+                this.$axios.$post(   '/posts.json', createdPost)
+                .then(data => {
+                    vuexContext.commit('addPost',{... createdPost,id:data.name})
                      
                     })
                 .catch(e => console.log(e))
@@ -60,10 +60,10 @@ const createStore = () => {
             editPost(vuexContext,editedPost){
                 console.log("GUARDANDO UN EDITED POST")
                 console.log(editedPost)
-                return axios.put( process.env.baseUrl +  '/posts/' + editedPost.id + '.json',editedPost)
-                    .then(res => {
+                return this.$axios.$put(  '/posts/' + editedPost.id + '.json',editedPost)
+                    .then(data => {
                         vuexContext.commit('editPost',editedPost)
-                        console.log(res)
+                        console.log(data)
                     })
                     .catch( e => console.log(e))
 

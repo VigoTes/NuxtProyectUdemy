@@ -49,8 +49,13 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-
+    '@nuxtjs/axios',    
   ],
+
+  axios:{
+      baseUrl:  process.env.BASE_URL ||  'https://nuxt-blog-1a161-default-rtdb.firebaseio.com',
+        credentials: false
+    },
 
   /*
   ** Build configuration
@@ -64,8 +69,7 @@ module.exports = {
     }
   },
   env:{
-    baseUrl: process.env.BASE_URL ||  'https://nuxt-blog-1a161-default-rtdb.firebaseio.com'
-
+     
   },
   transition:{
       name:'fade',

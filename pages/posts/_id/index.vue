@@ -31,7 +31,7 @@
 
 <script>
 
-import axios from 'axios'
+
 
 export default {
 
@@ -39,20 +39,20 @@ export default {
         title : "Blog eñ"
     },
     asyncData(context){
-        var rutaAConsultar =process.env.baseUrl + '/posts/' + context.params.id + '.json';
+        var rutaAConsultar = '/posts/' + context.params.id + '.json';
          
-        return axios.get(rutaAConsultar)
-            .then( res => {
+        return context.$axios.$get(rutaAConsultar)
+            .then( data => {
                 console.log("Se hizo una consulta a " + rutaAConsultar)
                 console.log("LA RES ES:")
-                console.log(res.data)
+                console.log(data)
 
-                if(res.data === null){
+                if(data === null){
                     throw new Error(e)
                 }
                     
                 return {
-                    loadedPost : res.data
+                    loadedPost : data
                 }
             })
             .catch( e => {
