@@ -14,7 +14,7 @@
             :is-admin="isAdmin"
             :thumbnail ="post.thumbnail"
             :title="post.title"
-            :previewText = "post.previewText"
+            :previewText="post.previewText"
             />
 
                   
