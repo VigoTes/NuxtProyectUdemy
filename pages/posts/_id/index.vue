@@ -34,8 +34,12 @@
 import axios from 'axios'
 
 export default {
+
+    head:{
+        title : "Blog eñ"
+    },
     asyncData(context){
-        var rutaAConsultar = 'https://nuxt-blog-1a161-default-rtdb.firebaseio.com/posts/' + context.params.id + '.json';
+        var rutaAConsultar =process.env.baseUrl + '/posts/' + context.params.id + '.json';
          
         return axios.get(rutaAConsultar)
             .then( res => {

@@ -7,7 +7,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: "Proyecto  Nuxt",
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -22,12 +22,18 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: '#3B8070' , height:'10px',duration:1000 },
+  loadingIndicator:{
+      name:'circle',
+      color: 'red'
+  },
 
   /*
   ** Global CSS
   */
   css: [
+    
+
   ],
 
   /*
@@ -52,5 +58,9 @@ module.exports = {
     extend(config, ctx) {
       
     }
+  },
+  env:{
+    baseUrl: process.env.BASE_URL ||  'https://nuxt-blog-1a161-default-rtdb.firebaseio.com'
+
   }
 }

@@ -17,7 +17,7 @@ export default {
     },
 
       asyncData(context){
-        var rutaAConsultar = 'https://nuxt-blog-1a161-default-rtdb.firebaseio.com/posts/' + context.params.postid + '.json';
+        var rutaAConsultar = process.env.baseUrl + '/posts/' + context.params.postid + '.json';
          
         return axios.get(rutaAConsultar)
             .then( res => {
