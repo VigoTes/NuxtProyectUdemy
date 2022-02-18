@@ -9,52 +9,24 @@
 
     </div>
 </template>
-
 <script>
- import PostList from '@/components/Posts/PostList'
+import PostList from '@/components/Posts/PostList'
 
- export default {
-     components:  {
-         PostList
-     },
-     asyncData(context,callback){
-         console.log(context)
-         setTimeout(()=>{
-             callback(null, 
-                            {
-                            loadedPosts : 
-                                      
-                                        [
-                                            {
-                                                id:"1",
-                                                title:"first post",
-                                                previewText:"hola mundo",
-                                                thumbnail:"https://gestion.cedepas.org/img/LogoCedepas.png"
-                                            },
-                                            {
-                                            id:"2",
-                                            title:"second post",
-                                            previewText:"hola2 mundo",
-                                            thumbnail:"https://gestion.cedepas.org/img/LogoCedepas.png"
-                                            }
-                                        ] 
-                            }
-            )
-         },1500)
-     },
-/* 
-     data(){
-         return {
-             loadedPosts: []
-         };
-     },
-      */
-     created(){
-         
-     }
- }
+export default {
+
+    components:{
+        PostList
+    },
+    computed:{
+        loadedPosts(){
+            console.log("AAAAAAAAAAA")
+            return this.$store.getters.loadedPosts
+        }
+    }
+
+}
 </script>
- 
+
  <style scoped>
     .intro{
         height: 300px;
