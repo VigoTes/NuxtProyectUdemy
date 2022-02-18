@@ -25,14 +25,14 @@ module.exports = {
   loading: { color: '#3B8070' , height:'10px',duration:1000 },
   loadingIndicator:{
       name:'circle',
-      color: 'red'
+      color: '#fa923f'
   },
 
   /*
   ** Global CSS
   */
   css: [
-    
+    '~assets/styles/main.css'
 
   ],
 
@@ -62,5 +62,10 @@ module.exports = {
   env:{
     baseUrl: process.env.BASE_URL ||  'https://nuxt-blog-1a161-default-rtdb.firebaseio.com'
 
-  }
+  },
+  transition:{
+      name:'fade',
+      mode:'out-in'
+  }    
+   
 }
